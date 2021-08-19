@@ -15,7 +15,7 @@ namespace Garage2._0G6
         {
             CreateHostBuilder(args).Build().Run();
         }
-
+        //Hello World /C
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
