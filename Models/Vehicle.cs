@@ -8,7 +8,7 @@ namespace Garage2._0G6.Models
     public class Vehicle
     {
         public int Id { get; set; }
-        public string Type { get; set; }
+        public VehicleType Type { get; set; }
         public string Regnum { get; set; }
 
         public string Color { get; set; }
@@ -20,8 +20,14 @@ namespace Garage2._0G6.Models
         public int Wheel { get; set; }
 
         public DateTime Arrivaldate { get; set; }
-        
+    }
 
-
+    public enum VehicleType
+    {
+        Airplane,
+        Boat,
+        Bus,
+        Car,
+        Motorcycle
     }
 }
