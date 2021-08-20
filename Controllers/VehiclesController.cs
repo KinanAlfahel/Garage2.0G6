@@ -47,6 +47,30 @@ namespace Garage2._0G6.Controllers
             return View("Index2", await model.ToListAsync());
         }
 
+        public async Task<IActionResult> Receipt(int? id) // HTML input name="regnum"
+        {
+            var vehicle = await _context.Vehicle.FindAsync(id);
+            var model = new ReceiptViewModel
+            {
+                Id = vehicle.Id,
+                Regnum = vehicle.Regnum,
+                Model = vehicle.Model,
+                Arrivaldate = vehicle.Arrivaldate,
+                Leavingdate = DateTime.Now,
+                Price = ((short)(DateTime.Now - vehicle.Arrivaldate).TotalMinutes) * 1
+            };
+
+            //model = regnum == null ?
+            //    model :
+            //    //model.Where(v => v.Regnum == regnum); EXACT MATCH
+            //    model.Where(v => v.Regnum.Contains(regnum));
+
+
+            return View("Receipt", model);
+        }
+
+
+
         // GET: Vehicles/Details/5
         public async Task<IActionResult> Details(int? id)
         {

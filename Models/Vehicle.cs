@@ -38,6 +38,9 @@ namespace Garage2._0G6.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Arrival time")]
         public DateTime Arrivaldate { get; set; }
+
+
+
     }
 
     public enum VehicleType //Limites Type to these options.

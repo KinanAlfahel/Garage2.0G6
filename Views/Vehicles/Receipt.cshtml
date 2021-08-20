@@ -1,0 +1,99 @@
+﻿@model ReceiptViewModel
+
+@{
+    ViewData["Title"] = "Receipt";
+}
+
+<h1>Receipt</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<!--<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Regnum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Arrivaldate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Leavingdate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>-->
+        @*@foreach (var item in Model) {*@
+        <!--<tr>
+            <td>
+                @Html.DisplayFor(model => model.Regnum)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Arrivaldate)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Leavingdate)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Price)
+            </td>-->
+            @*<td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>*@
+        <!--</tr>-->
+        @*}*@
+    <!--</tbody>
+</table>-->
+<div>
+    <h4>Vehicle</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Regnum)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Regnum
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Model
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Arrivaldate)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Arrivaldate
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Leavingdate)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Leavingdate
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Price SEK
+        </dd>
+    </dl>
+</div>
+<div>
+    @*<a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |*@
+    <a asp-action="List">Back to List</a>
+</div>
