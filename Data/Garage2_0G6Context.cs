@@ -4,18 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Garage2._0G6.Models;
+using Garage2._0G6.Models.ViewModels;
 
 namespace Garage2._0G6.Data
 {
     public class Garage2_0G6Context : DbContext
     {
+        public DbSet<Garage2._0G6.Models.Vehicle> Vehicle { get; set; }
         public Garage2_0G6Context (DbContextOptions<Garage2_0G6Context> options)
             : base(options)
         {
         }
-
-        public DbSet<Garage2._0G6.Models.Vehicle> Vehicle { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -32,8 +31,9 @@ namespace Garage2._0G6.Data
                    new Vehicle { Id = 8, Type = VehicleType.Boat, Regnum = "321ABC", Color = "red", Brand = "Toyota", Model = "Epic SX", Wheel = 0, Arrivaldate = DateTime.Now },
                    new Vehicle { Id = 9, Type = VehicleType.Bus, Regnum = "322ABC", Color = "blue", Brand = "Volvo", Model = "X4", Wheel = 6, Arrivaldate = DateTime.Now },
                    new Vehicle { Id = 10, Type = VehicleType.Airplane, Regnum = "331ABC", Color = "white", Brand = "Yamaha", Model = "Revell", Wheel = 6, Arrivaldate = DateTime.Now }
-
                );
         }
+
+        //public DbSet<Garage2._0G6.Models.ViewModels.VehicleViewModel> VehicleViewModel { get; set; } Didnt miss.
     }
 }
