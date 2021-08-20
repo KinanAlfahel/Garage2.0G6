@@ -74,17 +74,40 @@ namespace Garage2._0G6.Controllers
         // POST: Vehicles/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("Id,Type,Regnum,Color,Brand,Model,Wheel,Arrivaldate")] Vehicle vehicle)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(vehicle);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(vehicle);
+        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Type,Regnum,Color,Brand,Model,Wheel,Arrivaldate")] Vehicle vehicle)
+        //public async Task<IActionResult> Create([Bind("Id,Type,Regnum,Color,Brand,Model,Wheel")] Vehicle vehicle) // TODO Fungerar Men Exponerar en Vehicle istället för VehicleCreateModel
+        public async Task<IActionResult> Create([Bind("Id,Type,Regnum,Color,Brand,Model,Wheel")] VehicleCreateModel createVehicle)
         {
+           
             if (ModelState.IsValid)
             {
+                Vehicle vehicle = new();
+                vehicle.Id = createVehicle.Id;
+                vehicle.Type = createVehicle.Type;
+                vehicle.Regnum = createVehicle.Regnum;
+                vehicle.Color = createVehicle.Color;
+                vehicle.Brand = createVehicle.Brand;
+                vehicle.Model = createVehicle.Model;
+                vehicle.Wheel = createVehicle.Wheel;
+                vehicle.Arrivaldate = DateTime.Now;
                 _context.Add(vehicle);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(vehicle);
+            return View(createVehicle);
         }
 
         // GET: Vehicles/Edit/5
