@@ -42,7 +42,7 @@ namespace Garage2._0G6.Controllers
                 model :
                 //model.Where(v => v.Regnum == regnum); EXACT MATCH
                 model.Where(v => v.Regnum.Contains(regnum));
-
+                //Todo Not FOUND add
 
             return View("Index2", await model.ToListAsync());
         }
