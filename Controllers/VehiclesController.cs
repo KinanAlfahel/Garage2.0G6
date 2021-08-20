@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Garage2._0G6.Data;
 using Garage2._0G6.Models;
+using Garage2._0G6.Models.ViewModels;
 
 namespace Garage2._0G6.Controllers
 {
     public class VehiclesController : Controller
     {
         private readonly Garage2_0G6Context _context;
+        private readonly IVehicleRepository _vehicleRepository;
 
-        public VehiclesController(Garage2_0G6Context context)
+        public VehiclesController(Garage2_0G6Context context, IVehicleRepository vehicleRepository)
         {
             _context = context;
+            _vehicleRepository = vehicleRepository;
         }
 
         // GET: Vehicles
@@ -148,6 +151,30 @@ namespace Garage2._0G6.Controllers
         private bool VehicleExists(int id)
         {
             return _context.Vehicle.Any(e => e.Id == id);
+        }
+
+        [HttpGet]
+        [Route("List")]
+        public async Task<IActionResult> List()
+        {
+            var product = _context.Vehicle.Select(v => new VehiclesListViewModel
+            {
+                Id = v.Id,
+                Type = v.Type,
+                Regnum = v.Regnum,
+                Arrivaldate = v.Arrivaldate
+            });
+
+            return View(await product.ToListAsync());
+        }
+
+        [HttpGet]
+        [Route("Details/{id}")]
+        public IActionResult Details(int id)
+        {
+            var vehicle = _vehicleRepository.GetVehicleById(id);
+
+            return View(vehicle);
         }
     }
 }

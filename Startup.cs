@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Garage2._0G6.Data;
+using Garage2._0G6.Models;
 
 namespace Garage2._0G6
 {
@@ -29,6 +30,8 @@ namespace Garage2._0G6
 
             services.AddDbContext<Garage2_0G6Context>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("Garage2_0G6Context")));
+
+            services.AddScoped<IVehicleRepository, VehicleRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
