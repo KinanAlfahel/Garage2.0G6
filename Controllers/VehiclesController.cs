@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Garage2._0G6.Data;
 using Garage2._0G6.Models;
+using Garage2._0G6.Models.ViewModels;
 
 namespace Garage2._0G6.Controllers
 {
@@ -19,10 +20,29 @@ namespace Garage2._0G6.Controllers
             _context = context;
         }
 
-        // GET: Vehicles
+        //GET: Vehicles
         public async Task<IActionResult> Index()
         {
             return View(await _context.Vehicle.ToListAsync());
+        }
+        public async Task<IActionResult> Index2(string regnum=null) // HTML input name="regnum"
+        {
+            var model = _context.Vehicle.Select(v => new VehicleViewModel 
+            { 
+                Id = v.Id,
+                Regnum = v.Regnum,
+                Model = v.Model,
+                Arrivaldate = v.Arrivaldate
+            }
+            
+            );
+            model = regnum == null ?
+                model :
+                //model.Where(v => v.Regnum == regnum); EXACT MATCH
+                model.Where(v => v.Regnum.Contains(regnum));
+
+
+            return View("Index2", await model.ToListAsync());
         }
 
         // GET: Vehicles/Details/5
