@@ -22,6 +22,7 @@ namespace Garage2._0G6.Models.ViewModels
         //public int Wheel { get; set; }
 
         public DateTime Arrivaldate { get; set; }
+        public TimeSpan ParkedTime { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd-hh-mm}", ApplyFormatInEditMode = true)]
         //[DisplayName("Arrival time")]
