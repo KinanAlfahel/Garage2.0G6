@@ -149,7 +149,9 @@ namespace Garage2._0G6.Controllers
                 {
                     vehicle.Arrivaldate = DateTime.Now;
 
-                    TempData["Success"] = "Vehicle successfully parked";
+                    TempData["Success"] = $"Vehicle {vehicle.Regnum} successfully parked";
+
+                    vehicle.Regnum = vehicle.Regnum.ToUpper();
 
                     _context.Add(vehicle);
                     await _context.SaveChangesAsync();
@@ -226,7 +228,7 @@ namespace Garage2._0G6.Controllers
                         throw;
                     }
                 }
-                TempData["EditSuccess"] = "Vehicle successfully Edited";
+                TempData["EditSuccess"] = $"Vehicle {vehicle.Regnum} successfully Edited";
                 return RedirectToAction(nameof(Index));
             }
             return View(vehicle);
@@ -258,7 +260,7 @@ namespace Garage2._0G6.Controllers
             var vehicle = await _context.Vehicle.FindAsync(id);
             _context.Vehicle.Remove(vehicle);
             await _context.SaveChangesAsync();
-            TempData["CollectSuccess"] = "Vehicle successfully Collected";
+            TempData["CollectSuccess"] = $"Vehicle {vehicle.Regnum} successfully Collected";
             return RedirectToAction(nameof(Index));
         }
 
