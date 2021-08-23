@@ -27,22 +27,22 @@ namespace Garage2._0G6.Controllers
         {
             return View(await _context.Vehicle.ToListAsync());
         }
-        public async Task<IActionResult> Index2(string regnum=null) // HTML input name="regnum"
+        public async Task<IActionResult> Index2(string regnum = null) // HTML input name="regnum"
         {
-            var model = _context.Vehicle.Select(v => new VehicleViewModel 
-            { 
+            var model = _context.Vehicle.Select(v => new VehicleViewModel
+            {
                 Id = v.Id,
                 Regnum = v.Regnum,
                 Model = v.Model,
                 Arrivaldate = v.Arrivaldate
             }
-            
+
             );
             model = regnum == null ?
                 model :
                 //model.Where(v => v.Regnum == regnum); EXACT MATCH
                 model.Where(v => v.Regnum.Contains(regnum));
-
+            //Todo Not FOUND add
 
             return View("Index2", await model.ToListAsync());
         }
@@ -74,10 +74,24 @@ namespace Garage2._0G6.Controllers
         // POST: Vehicles/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("Id,Type,Regnum,Color,Brand,Model,Wheel,Arrivaldate")] Vehicle vehicle)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(vehicle);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(vehicle);
+        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Type,Regnum,Color,Brand,Model,Wheel,Arrivaldate")] Vehicle vehicle)
+        public async Task<IActionResult> Create([Bind("Id,Type,Regnum,Color,Brand,Model,Wheel")] Vehicle vehicle) 
+        //public async Task<IActionResult> Create([Bind("Id,Type,Regnum,Color,Brand,Model,Wheel")] VehicleCreateModel createVehicle)
         {
+
             if (ModelState.IsValid)
             {
                 bool unique = true;
@@ -109,6 +123,22 @@ namespace Garage2._0G6.Controllers
                 }
             }
             return View(vehicle);
+
+            // TODO Fungerar Men Exponerar en Vehicle istället för VehicleCreateModel
+            //    Vehicle vehicle = new();
+            //    vehicle.Id = createVehicle.Id;
+            //    vehicle.Type = createVehicle.Type;
+            //    vehicle.Regnum = createVehicle.Regnum;
+            //    vehicle.Color = createVehicle.Color;
+            //    vehicle.Brand = createVehicle.Brand;
+            //    vehicle.Model = createVehicle.Model;
+            //    vehicle.Wheel = createVehicle.Wheel;
+            //    vehicle.Arrivaldate = DateTime.Now;
+            //    _context.Add(vehicle);
+            //    await _context.SaveChangesAsync();
+            //    return RedirectToAction(nameof(Index));
+            //}
+            //    return View(createVehicle);
         }
 
         // GET: Vehicles/Edit/5
