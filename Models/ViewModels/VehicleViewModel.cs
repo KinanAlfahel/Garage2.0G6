@@ -20,5 +20,7 @@ namespace Garage2._0G6.Models.ViewModels
         //public int Wheel { get; set; }
 
         public DateTime Arrivaldate { get; set; }
+
+        public DateTime parkedTime;
     }
 }
