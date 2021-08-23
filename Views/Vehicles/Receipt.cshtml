@@ -6,57 +6,6 @@
 
 <h1>Receipt</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<!--<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Regnum)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Model)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Arrivaldate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Leavingdate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>-->
-        @*@foreach (var item in Model) {*@
-        <!--<tr>
-            <td>
-                @Html.DisplayFor(model => model.Regnum)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.Model)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.Arrivaldate)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.Leavingdate)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.Price)
-            </td>-->
-            @*<td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>*@
-        <!--</tr>-->
-        @*}*@
-    <!--</tbody>
-</table>-->
 <div>
     <h4>Vehicle</h4>
     <hr />
@@ -86,7 +35,13 @@
             @Model.Leavingdate
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.ParkingTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.ParkingTime.ToString(@"dd\:hh\:mm") Days:Hours:Minutes
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price) 
         </dt>
         <dd class="col-sm-10">
             @Model.Price SEK
@@ -94,8 +49,17 @@
     </dl>
 </div>
 <div>
+    @*<a href="javascript:window.print()">Click to Print This Page</a>*@
     @*<a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |*@
-    <p>Print and Leave</p>
 
-    <a asp-action="List">Back to List</a>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Collect and Print Receipt" class="btn btn-danger" href="javascript:window.print()" /> |
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Collect Without Receipt" class="btn btn-info" />
+    </form>
+    <div>
+        <br />
+        <a asp-action="Index"><i>Back to Main Page</i></a>
+    </div>
 </div>

@@ -14,8 +14,10 @@ namespace Garage2._0G6.Models.ViewModels
         public DateTime Leavingdate { get; set; }
         public double Price { get; set; }
 
+        public TimeSpan ParkingTime;
 
-        public int MyProperty { get; set; }
+
+        //public int MyProperty { get; set; } Was just a dummy for re-commit
 
 
     }

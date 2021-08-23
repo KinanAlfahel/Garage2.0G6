@@ -58,6 +58,7 @@ namespace Garage2._0G6.Controllers
                 Model = vehicle.Model,
                 Arrivaldate = vehicle.Arrivaldate,
                 Leavingdate = DateTime.Now,
+                ParkingTime = (DateTime.Now - vehicle.Arrivaldate),
                 Price = ((short)(DateTime.Now - vehicle.Arrivaldate).TotalMinutes) * 1
             };
 
