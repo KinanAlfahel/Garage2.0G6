@@ -33,6 +33,7 @@ namespace Garage2._0G6.Data
                    new Vehicle { Id = 10, Type = VehicleType.Airplane, Regnum = "331ABC", Color = "white", Brand = "Yamaha", Model = "Revell", Wheel = 6, Arrivaldate = DateTime.Now }
                );
         }
+        public DbSet<Garage2._0G6.Models.ViewModels.ReceiptViewModel> ReceiptViewModel { get; set; }
 
         //public DbSet<Garage2._0G6.Models.ViewModels.VehicleViewModel> VehicleViewModel { get; set; } Didnt miss.
     }
