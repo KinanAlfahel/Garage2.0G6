@@ -27,7 +27,14 @@ namespace Garage2._0G6.Controllers
         {
             return View(await _context.Vehicle.ToListAsync());
         }
-        public async Task<IActionResult> Index2(string regnum = null) // HTML input name="regnum"
+
+        public IActionResult Index2()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Index2(string regnum = null) // HTML input name="regnum"
         {
             var model = _context.Vehicle.Select(v => new VehicleViewModel
             {
@@ -45,7 +52,7 @@ namespace Garage2._0G6.Controllers
                 model.Where(v => v.Regnum.Contains(regnum));
             //Todo Not FOUND add
 
-            return View("Index2", await model.ToListAsync());
+            return View(model);
         }
 
         public async Task<IActionResult> Receipt(int? id) // HTML input name="regnum"
