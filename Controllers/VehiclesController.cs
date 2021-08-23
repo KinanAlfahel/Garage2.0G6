@@ -212,6 +212,7 @@ namespace Garage2._0G6.Controllers
                         throw;
                     }
                 }
+                TempData["EditSuccess"] = "Vehicle successfully Edited";
                 return RedirectToAction(nameof(Index));
             }
             return View(vehicle);
@@ -243,6 +244,7 @@ namespace Garage2._0G6.Controllers
             var vehicle = await _context.Vehicle.FindAsync(id);
             _context.Vehicle.Remove(vehicle);
             await _context.SaveChangesAsync();
+            TempData["CollectSuccess"] = "Vehicle successfully Collected";
             return RedirectToAction(nameof(Index));
         }
 
