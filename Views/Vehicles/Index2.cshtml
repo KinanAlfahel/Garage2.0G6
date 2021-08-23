@@ -30,6 +30,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Arrivaldate)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkedTime)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -44,6 +47,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Arrivaldate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkedTime)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

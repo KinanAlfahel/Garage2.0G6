@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,6 +23,8 @@ namespace Garage2._0G6.Models.ViewModels
 
         public DateTime Arrivaldate { get; set; }
 
-        public DateTime parkedTime;
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd-hh-mm}", ApplyFormatInEditMode = true)]
+        //[DisplayName("Arrival time")]
+        private TimeSpan parkedTime;
     }
 }

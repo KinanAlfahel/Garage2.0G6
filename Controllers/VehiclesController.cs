@@ -34,8 +34,9 @@ namespace Garage2._0G6.Controllers
                 Id = v.Id,
                 Regnum = v.Regnum,
                 Model = v.Model,
-                Arrivaldate = v.Arrivaldate
-            }
+                Arrivaldate = v.Arrivaldate,
+                ParkedTime = DateTime.Now - v.Arrivaldate
+        }
             
             );
             model = regnum == null ?
