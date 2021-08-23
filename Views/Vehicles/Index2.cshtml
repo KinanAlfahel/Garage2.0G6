@@ -56,8 +56,9 @@
                         @Html.DisplayFor(modelItem => item.Arrivaldate)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ParkedTime)
+                        @*Html.DisplayFor(modelItem => item.ParkedTime.ToString())*@
                         @*TODO @Html.DisplayFor(modelItem => item.ParkedTime.ToString(@"dd\:hh\:mm"))*@
+                        @item.ParkedTime.ToString(@"dd\:hh\:mm")
                     </td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
