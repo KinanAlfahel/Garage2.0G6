@@ -52,6 +52,12 @@ namespace Garage2._0G6.Controllers
                 model.Where(v => v.Regnum.Contains(regnum));
             //Todo Not FOUND add
 
+            if (model.Count() == 0)
+            {
+                TempData["Empty"] = "Registration number could not be found";
+                Console.WriteLine("funkar");
+            }
+
             return View(model);
         }
 

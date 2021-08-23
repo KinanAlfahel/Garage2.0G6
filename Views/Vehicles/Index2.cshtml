@@ -10,6 +10,12 @@
     Search for your vehicle
 </p>
 
+@if (TempData["Empty"] != null)
+{
+    <p class="text-danger">@TempData["Empty"].ToString()</p>
+
+}
+
 @using (Html.BeginForm())
 {
     <form asp-controller="Vehicles" asp-action="Index2" method="get">
@@ -22,26 +28,27 @@
     </form>
 }
 
-@if (Model != null && Model.Count() > 0)
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Regnum)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Model)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Arrivaldate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ParkedTime)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Regnum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Arrivaldate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkedTime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    @if (Model != null && Model.Count() > 0)
+    {
         <tbody>
             @foreach (var item in Model)
             {
@@ -66,6 +73,7 @@
                 </tr>
             }
         </tbody>
-    </table>
-}
+    }
+</table>
+
 
