@@ -80,9 +80,33 @@ namespace Garage2._0G6.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(vehicle);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                bool unique = true;
+
+                var duplicates = _context.Vehicle
+                    .Where(v => v.Regnum.Contains(vehicle.Regnum))
+                    .Select(v => v)
+                    .ToList();
+
+                if (duplicates.Count() > 0)
+                {
+                    unique = false;
+                }
+
+                if (unique)
+                {
+                    vehicle.Arrivaldate = DateTime.Now;
+
+                    TempData["Success"] = "Vehicle successfully parked";
+
+                    _context.Add(vehicle);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    ModelState.AddModelError("Regnum", "Registration number must be unique");
+                    return View(vehicle);
+                }
             }
             return View(vehicle);
         }
