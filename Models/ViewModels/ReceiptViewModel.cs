@@ -15,7 +15,7 @@ namespace Garage2._0G6.Models.ViewModels
         public double Price { get; set; }
 
 
-        
+        public int MyProperty { get; set; }
 
 
     }
