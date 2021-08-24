@@ -281,6 +281,10 @@ namespace Garage2._0G6.Controllers
                 Arrivaldate = v.Arrivaldate
             });
 
+            ViewBag.vehicleCount = _vehicleRepository.GetVehicleCount();
+            ViewBag.wheelCount = _vehicleRepository.GetWheelCount();
+            ViewBag.revenue = _vehicleRepository.GetRevenue();
+
             return View(await product.ToListAsync());
         }
 

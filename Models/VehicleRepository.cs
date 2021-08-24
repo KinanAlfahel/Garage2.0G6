@@ -26,5 +26,36 @@ namespace Garage2._0G6.Models
         {
             return _context.Vehicle.FirstOrDefault(v => v.Id == id);
         }
+
+        public int GetVehicleCount()
+        {
+            int result = _context.Vehicle.Count();
+
+            return result;
+        }
+
+        public int GetWheelCount()
+        {
+            int result = 0;
+
+            foreach (var vehicle in _context.Vehicle)
+            {
+                result += vehicle.Wheel;
+            }
+
+            return result;
+        }
+
+        public double GetRevenue()
+        {
+            double revenue = 0;
+
+            foreach (var vehicle in _context.Vehicle)
+            {
+                revenue += ((short)(DateTime.Now - vehicle.Arrivaldate).TotalMinutes) * 1;
+            }
+
+            return revenue;
+        }
     }
 }

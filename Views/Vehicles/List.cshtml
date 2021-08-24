@@ -6,9 +6,12 @@
 
 <h1>Vehicles</h1>
 
-<p>
-    <a asp-action="List">Parked vehicles</a>
-</p>
+<div>
+    <font class="m-3"><span class="font-weight-bold">Vehicles in garage:</span> @ViewBag.vehicleCount</font>
+    <font class="m-3"><span class="font-weight-bold">Wheels in garage:</span> @ViewBag.wheelCount</font>
+    <font class="m-3"><span class="font-weight-bold">Current revenue from vehicles in garage:</span> @ViewBag.revenue</font>
+</div>
+<br />
 <p>
     <a asp-action="Index2">Search</a>
 </p>
@@ -30,22 +33,22 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Regnum)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Arrivaldate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Collect / Delete</a>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Regnum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Arrivaldate)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Collect / Delete</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>

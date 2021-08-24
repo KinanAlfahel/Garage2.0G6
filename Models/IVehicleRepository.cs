@@ -10,5 +10,11 @@ namespace Garage2._0G6.Models
         IEnumerable<Vehicle> AllVehicles { get; }
 
         Vehicle GetVehicleById(int id);
+
+        int GetVehicleCount();
+
+        int GetWheelCount();
+
+        double GetRevenue();
     }
 }
