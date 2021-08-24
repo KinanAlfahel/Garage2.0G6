@@ -4,6 +4,10 @@
     ViewData["Title"] = "Index2";
 }
 @*/ TODO Add the Fantastic Font for search button*@
+
+
+
+
 <h1>Vehicles</h1>
 
 <p>
@@ -53,8 +57,8 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Regnum)
+                    <td>                        
+                        <a onclick="AlertName('@String.Format("{0} {1}", item.Regnum, item.Model)')" href="#">@String.Format("{0}", item.Regnum)</a>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Model)
@@ -65,7 +69,16 @@
                     <td>
                         @*Html.DisplayFor(modelItem => item.ParkedTime.ToString())*@
                         @*TODO @Html.DisplayFor(modelItem => item.ParkedTime.ToString(@"dd\:hh\:mm"))*@
-                        @item.ParkedTime.ToString(@"dd\:hh\:mm")
+                        @if (item.ParkedTime > new TimeSpan(3,0,0,0,0))
+                        {
+
+                            <span style="color:red;">*Warning* @item.ParkedTime.ToString(@"dd\:hh\:mm")</span>
+                            
+                        }
+                        else
+                        {
+                        <span style="color:green;">@item.ParkedTime.ToString(@"dd\:hh\:mm") </span>
+                        }
                     </td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
