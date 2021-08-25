@@ -1,0 +1,70 @@
+﻿@model IEnumerable<VehicleViewModel>
+@inject Garage2._0G6.Services.IPropertiesSelectListService service
+@{
+    ViewData["Title"] = "Filter";
+}
+
+<h1>Filter</h1>
+
+
+@*{
+<form asp-controller="Vehicles" asp-action="Filter">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" asp-for="Regnum" placeholder="Search on registration number" />
+        <div class="input-group-append">
+            <select asp-for="Column" asp-items="@await service.GetColumnsAsync()" class="form-control">
+                <option selected="selected" value="">Please select</option>
+            </select>
+        </div>
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-search">&emsp;Search</i></button>
+        </div>
+    </div>
+</form>
+}*@
+
+<div class="table-responsive">
+    <table class="table table-bordered table-condensed table-striped table-hover sortable">
+        <thead>
+            <tr>
+                <th data-defaultsign="AZ">
+                    @Html.DisplayNameFor(model => model.Regnum)
+                </th>
+                <th data-defaultsign="AZ">
+                    @Html.DisplayNameFor(model => model.Model)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Arrivaldate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ParkedTime)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Regnum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Model)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Arrivaldate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ParkedTime)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

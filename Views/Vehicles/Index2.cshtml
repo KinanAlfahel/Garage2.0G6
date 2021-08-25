@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<VehicleViewModel>
+@*@inject Garage2._0G6.Services.IPropertiesSelectListService service*@
 
 @{
     ViewData["Title"] = "Index2";
@@ -16,24 +17,43 @@
 
 @if (TempData["Empty"] != null)
 {
-    <p class="text-danger">@TempData["Empty"].ToString()</p>
+<p class="text-danger">@TempData["Empty"].ToString()</p>
 
 }
 
 @using (Html.BeginForm())
 {
-    <form asp-controller="Vehicles" asp-action="Index2" method="get">
-        <div class="input-group mt-3">
-            <input type="text" name="regnum" class="form-control" placeholder="Search Registration Number" />
+<form asp-controller="Vehicles" asp-action="Index2" method="get">
+    <div class="input-group mt-3">
+        <input type="text" name="regnum" class="form-control" placeholder="Search Registration Number" />
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-danger"><i class="fa fa-search">&emsp;Search</i></button>
+        </div>
+    </div>
+</form>
+}
+
+@*{
+    <form asp-controller="Vehicles" asp-action="Filter">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" asp-for="Regnum" placeholder="Search on title..." />
             <div class="input-group-append">
-                <button type="submit" class="btn btn-danger"><i class="fa fa-search">&emsp;Search</i></button>
+                <select asp-for="Column" asp-items="@await service.GetColumnsAsync()" class="form-control">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+            </div>
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-search">&emsp;Search</i></button>
             </div>
         </div>
     </form>
-}
+    }*@
 
 
-<table class="table">
+
+
+
+<table class="table table-bordered table-condensed table-striped table-hover sortable">
     <thead>
         <tr>
             <th>
@@ -53,41 +73,41 @@
     </thead>
     @if (Model != null && Model.Count() > 0)
     {
-        <tbody>
-            @foreach (var item in Model)
+    <tbody>
+        @foreach (var item in Model)
             {
-                <tr>
-                    <td>                        
-                        <a onclick="AlertName('@String.Format("{0} {1}", item.Regnum, item.Model)')" href="#">@String.Format("{0}", item.Regnum)</a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Model)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Arrivaldate)
-                    </td>
-                    <td>
-                        @*Html.DisplayFor(modelItem => item.ParkedTime.ToString())*@
-                        @*TODO @Html.DisplayFor(modelItem => item.ParkedTime.ToString(@"dd\:hh\:mm"))*@
-                        @if (item.ParkedTime > new TimeSpan(3,0,0,0,0))
+        <tr>
+            <td>
+                <a onclick="AlertName('@String.Format("{0} {1}", item.Regnum, item.Model)')" href="#">@String.Format("{0}", item.Regnum)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Arrivaldate)
+            </td>
+            <td>
+                @*Html.DisplayFor(modelItem => item.ParkedTime.ToString())*@
+                @*TODO @Html.DisplayFor(modelItem => item.ParkedTime.ToString(@"dd\:hh\:mm"))*@
+                @if (item.ParkedTime > new TimeSpan(3, 0, 0, 0, 0))
                         {
 
-                            <span style="color:red;">*Warning* @item.ParkedTime.ToString(@"dd\:hh\:mm")</span>
-                            
+                <span style="color:red;">*Warning* @item.ParkedTime.ToString(@"dd\:hh\:mm")</span>
+
                         }
                         else
                         {
-                        <span style="color:green;">@item.ParkedTime.ToString(@"dd\:hh\:mm") </span>
+                <span style="color:green;">@item.ParkedTime.ToString(@"dd\:hh\:mm") </span>
                         }
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Receipt" asp-route-id="@item.Id">Collect / Receipt</a> |
-                    </td>
-                </tr>
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Receipt" asp-route-id="@item.Id">Collect / Receipt</a> |
+            </td>
+        </tr>
             }
-        </tbody>
+    </tbody>
     }
 </table>
 
@@ -96,3 +116,154 @@
 
     <a asp-action="Index"><i>Back to Main Menu</i></a>
 </div>
+
+
+<script>
+    /**
+     * Inject hyperlinks, into the column headers of sortable tables, which sort
+     * the corresponding column when clicked.
+     */
+    var tables = document.querySelectorAll("table.sortable"),
+        table,
+        thead,
+        headers,
+        i,
+        j;
+
+    for (i = 0; i < tables.length; i++) {
+        table = tables[i];
+
+        if (thead = table.querySelector("thead")) {
+            headers = thead.querySelectorAll("th");
+
+            for (j = 0; j < headers.length; j++) {
+                headers[j].innerHTML = "<a href='#'>" + headers[j].innerText + "</a>";
+            }
+
+            thead.addEventListener("click", sortTableFunction(table));
+        }
+    }
+
+    /**
+     * Create a function to sort the given table.
+     */
+    function sortTableFunction(table) {
+        return function (ev) {
+            if (ev.target.tagName.toLowerCase() == 'a') {
+                sortRows(table, siblingIndex(ev.target.parentNode));
+                ev.preventDefault();
+            }
+        };
+    }
+    /**
+ * Get the index of a node relative to its siblings — the first (eldest) sibling
+ * has index 0, the next index 1, etc.
+ */
+    function siblingIndex(node) {
+        var count = 0;
+
+        while (node = node.previousElementSibling) {
+            count++;
+        }
+
+        return count;
+    }
+
+    /**
+     * Sort the given table by the numbered column (0 is the first column, etc.)
+     */
+    function sortRows(table, columnIndex) {
+        var rows = table.querySelectorAll("tbody tr"),
+            sel = "thead th:nth-child(" + (columnIndex + 1) + ")",
+            sel2 = "td:nth-child(" + (columnIndex + 1) + ")",
+            classList = table.querySelector(sel).classList,
+            values = [],
+            cls = "",
+            allNum = true,
+            val,
+            index,
+            node;
+
+        if (classList) {
+            if (classList.contains("date")) {
+                cls = "date";
+            } else if (classList.contains("number")) {
+                cls = "number";
+            }
+        }
+
+        for (index = 0; index < rows.length; index++) {
+            node = rows[index].querySelector(sel2);
+            val = node.innerText;
+
+            if (isNaN(val)) {
+                allNum = false;
+            } else {
+                val = parseFloat(val);
+            }
+
+            values.push({ value: val, row: rows[index] });
+        }
+
+        if (cls == "" && allNum) {
+            cls = "number";
+        }
+
+        if (cls == "number") {
+            values.sort(sortNumberVal);
+            values = values.reverse();
+        } else if (cls == "date") {
+            values.sort(sortDateVal);
+        } else {
+            values.sort(sortTextVal);
+        }
+
+        for (var idx = 0; idx < values.length; idx++) {
+            table.querySelector("tbody").appendChild(values[idx].row);
+        }
+    }
+
+    /**
+     * Compare two 'value objects' numerically
+     */
+    function sortNumberVal(a, b) {
+        return sortNumber(a.value, b.value);
+    }
+
+    /**
+     * Numeric sort comparison
+     */
+    function sortNumber(a, b) {
+        return a - b;
+    }
+
+    /**
+     * Compare two 'value objects' as dates
+     */
+    function sortDateVal(a, b) {
+        var dateA = Date.parse(a.value),
+            dateB = Date.parse(b.value);
+
+        return sortNumber(dateA, dateB);
+    }
+
+    /**
+     * Compare two 'value objects' as simple text; case-insensitive
+     */
+    function sortTextVal(a, b) {
+        var textA = (a.value + "").toUpperCase();
+        var textB = (b.value + "").toUpperCase();
+
+        if (textA < textB) {
+            return -1;
+        }
+
+        if (textA > textB) {
+            return 1;
+        }
+
+        return 0;
+    }
+
+
+</script>
