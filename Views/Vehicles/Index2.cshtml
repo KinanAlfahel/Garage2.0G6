@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<VehicleViewModel>
-@inject Garage2._0G6.Services.IPropertiesSelectListService service
+@*@inject Garage2._0G6.Services.IPropertiesSelectListService service*@
 
 @{
     ViewData["Title"] = "Index2";
@@ -17,37 +17,37 @@
 
 @if (TempData["Empty"] != null)
 {
-    <p class="text-danger">@TempData["Empty"].ToString()</p>
+<p class="text-danger">@TempData["Empty"].ToString()</p>
 
 }
 
 @using (Html.BeginForm())
 {
-    <form asp-controller="Vehicles" asp-action="Index2" method="get">
-        <div class="input-group mt-3">
-            <input type="text" name="regnum" class="form-control" placeholder="Search Registration Number" />
-            <div class="input-group-append">
-                <button type="submit" class="btn btn-danger"><i class="fa fa-search">&emsp;Search</i></button>
-            </div>
-        </div>
-    </form>
-}
-
-@*{
-<form asp-controller="Vehicles" asp-action="Filter">
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" asp-for="Regnum" placeholder="Search on title..." />
+<form asp-controller="Vehicles" asp-action="Index2" method="get">
+    <div class="input-group mt-3">
+        <input type="text" name="regnum" class="form-control" placeholder="Search Registration Number" />
         <div class="input-group-append">
-            <select asp-for="Column" asp-items="@await service.GetColumnsAsync()" class="form-control">
-                <option selected="selected" value="">Please select</option>
-            </select>
-        </div>
-        <div class="input-group-append">
-            <button type="submit" class="btn btn-primary"><i class="fa fa-search">&emsp;Search</i></button>
+            <button type="submit" class="btn btn-danger"><i class="fa fa-search">&emsp;Search</i></button>
         </div>
     </div>
 </form>
-}*@
+}
+
+@*{
+    <form asp-controller="Vehicles" asp-action="Filter">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" asp-for="Regnum" placeholder="Search on title..." />
+            <div class="input-group-append">
+                <select asp-for="Column" asp-items="@await service.GetColumnsAsync()" class="form-control">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+            </div>
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-search">&emsp;Search</i></button>
+            </div>
+        </div>
+    </form>
+    }*@
 
 
 
@@ -72,41 +72,41 @@
     </thead>
     @if (Model != null && Model.Count() > 0)
     {
-        <tbody>
-            @foreach (var item in Model)
+    <tbody>
+        @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        <a onclick="AlertName('@String.Format("{0} {1}", item.Regnum, item.Model)')" href="#">@String.Format("{0}", item.Regnum)</a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Model)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Arrivaldate)
-                    </td>
-                    <td>
-                        @*Html.DisplayFor(modelItem => item.ParkedTime.ToString())*@
-                        @*TODO @Html.DisplayFor(modelItem => item.ParkedTime.ToString(@"dd\:hh\:mm"))*@
-                        @if (item.ParkedTime > new TimeSpan(3, 0, 0, 0, 0))
+        <tr>
+            <td>
+                <a onclick="AlertName('@String.Format("{0} {1}", item.Regnum, item.Model)')" href="#">@String.Format("{0}", item.Regnum)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Arrivaldate)
+            </td>
+            <td>
+                @*Html.DisplayFor(modelItem => item.ParkedTime.ToString())*@
+                @*TODO @Html.DisplayFor(modelItem => item.ParkedTime.ToString(@"dd\:hh\:mm"))*@
+                @if (item.ParkedTime > new TimeSpan(3, 0, 0, 0, 0))
                         {
 
-                            <span style="color:red;">*Warning* @item.ParkedTime.ToString(@"dd\:hh\:mm")</span>
+                <span style="color:red;">*Warning* @item.ParkedTime.ToString(@"dd\:hh\:mm")</span>
 
                         }
                         else
                         {
-                            <span style="color:green;">@item.ParkedTime.ToString(@"dd\:hh\:mm") </span>
+                <span style="color:green;">@item.ParkedTime.ToString(@"dd\:hh\:mm") </span>
                         }
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Receipt" asp-route-id="@item.Id">Collect / Receipt</a> |
-                    </td>
-                </tr>
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Receipt" asp-route-id="@item.Id">Collect / Receipt</a> |
+            </td>
+        </tr>
             }
-        </tbody>
+    </tbody>
     }
 </table>
 
