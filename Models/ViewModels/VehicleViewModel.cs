@@ -11,17 +11,22 @@ namespace Garage2._0G6.Models.ViewModels
     {
         public int Id { get; set; }
         //public VehicleType Type { get; set; }
+        [DisplayName("Registration number")]
         public string Regnum { get; set; }
 
         //public string Color { get; set; } To make it Different.
 
         //public string Brand { get; set; }
 
+        [DisplayName("Vehicle Model")]
         public string Model { get; set; }
 
         //public int Wheel { get; set; }
 
+        [DisplayName("Arrival Time")]
         public DateTime Arrivaldate { get; set; }
+
+        [DisplayName("Parked Time")]
         public TimeSpan ParkedTime { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd-hh-mm}", ApplyFormatInEditMode = true)]
