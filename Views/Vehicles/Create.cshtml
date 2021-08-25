@@ -4,44 +4,52 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>PARK VEHICLE</h1>
+<h1 class="row d-flex justify-content-center">PARK VEHICLE</h1>
 
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">           
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Type" class="control-label"></label>                   
-                    <select asp-for="Type" asp-items="@Html.GetEnumSelectList<VehicleType>()" class="form-control">
-                        <option selected="selected" value="">Please Select</option>
-                    </select>
-                    <span asp-validation-for="Type" class="text-danger"></span>
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-8 md-1">
+            <form asp-action="Create">
+                <div class="row">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label asp-for="Type" class="control-label"></label>
+                        <select asp-for="Type" asp-items="@Html.GetEnumSelectList<VehicleType>()" class="form-control">
+                            <option selected="selected" value="">Please Select</option>
+                        </select>
+                        <span asp-validation-for="Type" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label asp-for="Regnum" class="control-label"></label>
+                        <input asp-for="Regnum" class="form-control" />
+                        <span asp-validation-for="Regnum" class="text-danger"></span>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Regnum" class="control-label"></label>
-                    <input asp-for="Regnum" class="form-control" />
-                    <span asp-validation-for="Regnum" class="text-danger"></span>
+                <div class="row">
+                    <div class="form-group col-md-6 mb-3">
+                        <label asp-for="Color" class="control-label"></label>
+                        <input asp-for="Color" class="form-control" />
+                        <span asp-validation-for="Color" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label asp-for="Brand" class="control-label"></label>
+                        <input asp-for="Brand" class="form-control" />
+                        <span asp-validation-for="Brand" class="text-danger"></span>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Color" class="control-label"></label>
-                    <input asp-for="Color" class="form-control" />
-                    <span asp-validation-for="Color" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Brand" class="control-label"></label>
-                    <input asp-for="Brand" class="form-control" />
-                    <span asp-validation-for="Brand" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Model" class="control-label"></label>
-                    <input asp-for="Model" class="form-control" />
-                    <span asp-validation-for="Model" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Wheel" class="control-label"></label>
-                    <input asp-for="Wheel" class="form-control" />
-                    <span asp-validation-for="Wheel" class="text-danger"></span>
+                <div class="row">
+                    <div class="form-group col-md-6 mb-3">
+                        <label asp-for="Model" class="control-label"></label>
+                        <input asp-for="Model" class="form-control" />
+                        <span asp-validation-for="Model" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label asp-for="Wheel" class="control-label"></label>
+                        <input asp-for="Wheel" class="form-control" />
+                        <span asp-validation-for="Wheel" class="text-danger"></span>
+                    </div>
                 </div>
                 <div>
                     <p>Your Arrival Time: @DateTime.Now</p>
@@ -49,14 +57,15 @@
                 <div class="form-group">
                     <input type="submit" value="Park Vehicle" class="btn btn-primary" />
                 </div>
-        </form>
+            </form>
+        </div>
+    </div>
+    <div>
+        <a asp-action="Index"><i>Back to Main Menu</i></a>
     </div>
 </div>
+  
 
-<div>
-    <a asp-action="Index"><i>Back to Main Menu</i></a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
