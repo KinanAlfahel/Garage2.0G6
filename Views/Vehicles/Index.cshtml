@@ -16,23 +16,29 @@
 
 @if (TempData["Success"] != null)
 {
-    <div class="text-center text-success">
-        <p>@TempData["Success"].ToString()</p>
+    <div class="index-options text-center text-success" id="threeSeconds">
+        <H1>@TempData["Success"].ToString()</H1>
     </div>
 }
+@*<div class="index-options text-center" id="threeSeconds">
+    <H1>Here I am</H1>
+</div>*@
+
+
+
 
 @if (TempData["Error"] != null)
 {
-    <div class="text-center text-danger">
+    <div class="index-options text-center text-success" id="threeSeconds">
         <p>@TempData["Error"].ToString()</p>
     </div>
 }
 @*<div class="index-options text-center">
-    <h5 class="garage-info mb-3">Do you want to park or collect a vehicle?</h5>
-    <button class="btn btn-primary btn-lg" onclick="window.location.href='/Vehicles/Create'">Park</button>
-    &nbsp;
-    <button class="btn btn-primary btn-lg" onclick="window.location.href='/Vehicles/Index2'">Collect</button>
-</div>*@
+        <h5 class="garage-info mb-3">Do you want to park or collect a vehicle?</h5>
+        <button class="btn btn-primary btn-lg" onclick="window.location.href='/Vehicles/Create'">Park</button>
+        &nbsp;
+        <button class="btn btn-primary btn-lg" onclick="window.location.href='/Vehicles/Index2'">Collect</button>
+    </div>*@
 
 
 
@@ -65,3 +71,18 @@
         </div>
     </div>
 </div>
+
+@*<script>
+window.setTimeout("closeDiv();", 7000);
+    function closeDiv()
+    {
+        let Temp = document.getElementById("threeSeconds")
+        /*let Temp = document.getElementsByClassName("disappears");*/
+        if (Temp != null)
+        Temp.style.display = "none";
+
+    // jQuery version
+        $("#threeSeconds").fadeOut("slow", null);
+    }
+</script>*@
+
