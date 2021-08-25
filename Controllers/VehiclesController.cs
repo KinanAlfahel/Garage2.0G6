@@ -15,6 +15,7 @@ namespace Garage2._0G6.Controllers
     {
         private readonly Garage2_0G6Context _context;
         private readonly IVehicleRepository _vehicleRepository;
+        private const int sizeLimit = 35;
 
         public VehiclesController(Garage2_0G6Context context, IVehicleRepository vehicleRepository)
         {
@@ -25,7 +26,12 @@ namespace Garage2._0G6.Controllers
         //GET: Vehicles
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Vehicle.ToListAsync());
+            var indexVM = new IndexViewModel
+            {
+                FreeSpaces = sizeLimit - _context.Vehicle.Count()
+            };
+
+            return View(indexVM);
         }
 
         public IActionResult Index2()
@@ -107,6 +113,11 @@ namespace Garage2._0G6.Controllers
         // GET: Vehicles/Create
         public IActionResult Create()
         {
+            if (_context.Vehicle.Count() >= sizeLimit)
+            {
+                TempData["Error"] = $"Garage is full";
+                return RedirectToAction(nameof(Index));
+            }
             return View();
         }
 
@@ -125,6 +136,7 @@ namespace Garage2._0G6.Controllers
         //    }
         //    return View(vehicle);
         //}
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Type,Regnum,Color,Brand,Model,Wheel")] Vehicle vehicle) 
@@ -228,7 +240,7 @@ namespace Garage2._0G6.Controllers
                         throw;
                     }
                 }
-                TempData["EditSuccess"] = $"Vehicle {vehicle.Regnum} successfully Edited";
+                TempData["Success"] = $"Vehicle {vehicle.Regnum} successfully edited";
                 return RedirectToAction(nameof(Index));
             }
             return View(vehicle);
@@ -260,7 +272,7 @@ namespace Garage2._0G6.Controllers
             var vehicle = await _context.Vehicle.FindAsync(id);
             _context.Vehicle.Remove(vehicle);
             await _context.SaveChangesAsync();
-            TempData["CollectSuccess"] = $"Vehicle {vehicle.Regnum} successfully Collected";
+            TempData["Success"] = $"Vehicle {vehicle.Regnum} successfully collected";
             return RedirectToAction(nameof(Index));
         }
 
