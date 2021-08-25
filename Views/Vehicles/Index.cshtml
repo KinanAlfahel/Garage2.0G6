@@ -1,9 +1,16 @@
-﻿@{
+﻿@model Garage2._0G6.Models.ViewModels.IndexViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1>Lexicon Garage</h1>
+</div>
+<br />
+
+<div class="text-center">
+    <font class="m-3"><span class="font-weight-bold">Current free spaces:</span> @Model.FreeSpaces</font>
 </div>
 <br />
 
@@ -14,17 +21,10 @@
     </div>
 }
 
-@if (TempData["EditSuccess"] != null)
+@if (TempData["Error"] != null)
 {
-    <div class="text-center text-success">
-        <p>@TempData["EditSuccess"].ToString()</p>
-    </div>
-}
-
-@if (TempData["CollectSuccess"] != null)
-{
-    <div class="text-center text-success">
-        <p>@TempData["CollectSuccess"].ToString()</p>
+    <div class="text-center text-danger">
+        <p>@TempData["Error"].ToString()</p>
     </div>
 }
 @*<div class="index-options text-center">

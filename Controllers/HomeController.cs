@@ -18,10 +18,10 @@ namespace Garage2._0G6.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
 
         public IActionResult Privacy()
         {
