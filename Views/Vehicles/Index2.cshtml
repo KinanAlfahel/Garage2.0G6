@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<VehicleViewModel>
+@inject Garage2._0G6.Services.IPropertiesSelectListService service
 
 @{
     ViewData["Title"] = "Index2";
@@ -32,8 +33,26 @@
     </form>
 }
 
+@*{
+<form asp-controller="Vehicles" asp-action="Filter">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" asp-for="Regnum" placeholder="Search on title..." />
+        <div class="input-group-append">
+            <select asp-for="Column" asp-items="@await service.GetColumnsAsync()" class="form-control">
+                <option selected="selected" value="">Please select</option>
+            </select>
+        </div>
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-search">&emsp;Search</i></button>
+        </div>
+    </div>
+</form>
+}*@
 
-<table class="table">
+
+
+
+<table class="table table-bordered table-condensed table-striped table-hover">
     <thead>
         <tr>
             <th>
@@ -57,7 +76,7 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>                        
+                    <td>
                         <a onclick="AlertName('@String.Format("{0} {1}", item.Regnum, item.Model)')" href="#">@String.Format("{0}", item.Regnum)</a>
                     </td>
                     <td>
@@ -69,15 +88,15 @@
                     <td>
                         @*Html.DisplayFor(modelItem => item.ParkedTime.ToString())*@
                         @*TODO @Html.DisplayFor(modelItem => item.ParkedTime.ToString(@"dd\:hh\:mm"))*@
-                        @if (item.ParkedTime > new TimeSpan(3,0,0,0,0))
+                        @if (item.ParkedTime > new TimeSpan(3, 0, 0, 0, 0))
                         {
 
                             <span style="color:red;">*Warning* @item.ParkedTime.ToString(@"dd\:hh\:mm")</span>
-                            
+
                         }
                         else
                         {
-                        <span style="color:green;">@item.ParkedTime.ToString(@"dd\:hh\:mm") </span>
+                            <span style="color:green;">@item.ParkedTime.ToString(@"dd\:hh\:mm") </span>
                         }
                     </td>
                     <td>
