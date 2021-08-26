@@ -54,7 +54,8 @@
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Collect and Print Receipt" class="btn btn-danger" href="javascript:window.print()" /> |
+        @*<input type="submit" value="Collect and Print Receipt" class="btn btn-danger" href="javascript:window.print()" /> |*@
+        <input type="submit" value="Collect and Print Receipt" class="btn btn-danger" onclick="window.print();return false;" /> |
         @*<embed type="application/pdf"
         src="path_to_pdf_document.pdf"
         id="pdfDocument"

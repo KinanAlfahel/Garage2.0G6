@@ -110,7 +110,7 @@ namespace Garage2._0G6.Controllers
             return View(vehicle);
         }
 
-        // GET: Vehicles/Create
+        // GET: Vehicles/Park
         public IActionResult Create()
         {
             if (_context.Vehicle.Count() >= sizeLimit)
@@ -121,12 +121,12 @@ namespace Garage2._0G6.Controllers
             return View();
         }
 
-        // POST: Vehicles/Create
+        // POST: Vehicles/Park
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("Id,Type,Regnum,Color,Brand,Model,Wheel,Arrivaldate")] Vehicle vehicle)
+        //public async Task<IActionResult> Park([Bind("Id,Type,Regnum,Color,Brand,Model,Wheel,Arrivaldate")] Vehicle vehicle)
         //{
         //    if (ModelState.IsValid)
         //    {
@@ -139,8 +139,8 @@ namespace Garage2._0G6.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Type,Regnum,Color,Brand,Model,Wheel")] Vehicle vehicle) 
-        //public async Task<IActionResult> Create([Bind("Id,Type,Regnum,Color,Brand,Model,Wheel")] VehicleCreateModel createVehicle)
+        public async Task<IActionResult> Create([Bind("Id,Type,Regnum,Color,Brand,Model,Wheel")] Vehicle vehicle)
+        //public async Task<IActionResult> Park([Bind("Id,Type,Regnum,Color,Brand,Model,Wheel")] VehicleCreateModel createVehicle)
         {
 
             if (ModelState.IsValid)
@@ -186,7 +186,7 @@ namespace Garage2._0G6.Controllers
             //    vehicle.Brand = createVehicle.Brand;
             //    vehicle.Model = createVehicle.Model;
             //    vehicle.Wheel = createVehicle.Wheel;
-            //    vehicle.Arrivaldate = DateTime.Now;
+            //    vehicle.Arrivaldate = //DateTime.Now; Todo <= fetch from database.  db.Vehicles.FirstOrDefault(p => p.id = user.id); se edit
             //    _context.Add(vehicle);
             //    await _context.SaveChangesAsync();
             //    return RedirectToAction(nameof(Index));
@@ -216,8 +216,9 @@ namespace Garage2._0G6.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         //public async Task<IActionResult> Edit(int id, [Bind("Id,Type,Regnum,Color,Brand,Model,Wheel,Arrivaldate")] Vehicle vehicle)
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Type,Regnum,Color,Brand,Model,Wheel")] Vehicle vehicle)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Type,Regnum,Color,Brand,Model,Wheel")] Vehicle vehicle) //TODO skicka in en ANNAN VY. Arrival date ändras till 0 här.
         {
+            // https://entityframework.net/knowledge-base/26546891/how-keep-original-value-for-some-field-when-execute-edit-on-mvc-
             if (id != vehicle.Id)
             {
                 return NotFound();
