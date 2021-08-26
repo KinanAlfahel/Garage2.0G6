@@ -39,7 +39,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Wheel" class="control-label"></label>
-                <input asp-for="Wheel" class="form-control" />
+                <input asp-for="Wheel" class="form-control" min="1"/>
                 <span asp-validation-for="Wheel" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -50,7 +50,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index"><i>Back to Main Menu</i></a>
 </div>
 
 @section Scripts {
