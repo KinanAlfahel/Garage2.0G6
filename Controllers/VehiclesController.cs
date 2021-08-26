@@ -283,21 +283,42 @@ namespace Garage2._0G6.Controllers
 
         [HttpGet]
         [Route("List")]
-        public async Task<IActionResult> List()
+        public IActionResult List()
         {
-            var product = _context.Vehicle.Select(v => new VehiclesListViewModel
+            var list = new ListViewModel
             {
-                Id = v.Id,
-                Type = v.Type,
-                Regnum = v.Regnum,
-                Arrivaldate = v.Arrivaldate
-            });
+                VehicleList = _context.Vehicle.Select(v => new VehiclesListViewModel
+                {
+                    Id = v.Id,
+                    Type = v.Type,
+                    Regnum = v.Regnum,
+                    Arrivaldate = v.Arrivaldate
+                }),
 
-            ViewBag.vehicleCount = _vehicleRepository.GetVehicleCount();
-            ViewBag.wheelCount = _vehicleRepository.GetWheelCount();
-            ViewBag.revenue = _vehicleRepository.GetRevenue();
+                VehicleCount = _vehicleRepository.GetVehicleCount(),
+                WheelCount = _vehicleRepository.GetWheelCount(),
+                Revenue = _vehicleRepository.GetRevenue(),
 
-            return View(await product.ToListAsync());
+                CarCount = _vehicleRepository.GetVehicleAmount(VehicleType.Car),
+                BusCount = _vehicleRepository.GetVehicleAmount(VehicleType.Bus),
+                BoatCount = _vehicleRepository.GetVehicleAmount(VehicleType.Boat),
+                MotorcycleCount = _vehicleRepository.GetVehicleAmount(VehicleType.Motorcycle),
+                AirplaneCount = _vehicleRepository.GetVehicleAmount(VehicleType.Airplane)
+            };
+
+            //var product = _context.Vehicle.Select(v => new VehiclesListViewModel
+            //{
+            //    Id = v.Id,
+            //    Type = v.Type,
+            //    Regnum = v.Regnum,
+            //    Arrivaldate = v.Arrivaldate
+            //});
+
+            //ViewBag.vehicleCount = _vehicleRepository.GetVehicleCount();
+            //ViewBag.wheelCount = _vehicleRepository.GetWheelCount();
+            //ViewBag.revenue = _vehicleRepository.GetRevenue();
+
+            return View(list);
         }
 
         [HttpGet]

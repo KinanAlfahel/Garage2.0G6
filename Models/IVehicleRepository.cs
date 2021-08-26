@@ -16,5 +16,7 @@ namespace Garage2._0G6.Models
         int GetWheelCount();
 
         double GetRevenue();
+
+        int GetVehicleAmount(VehicleType type);
     }
 }

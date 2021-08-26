@@ -57,5 +57,20 @@ namespace Garage2._0G6.Models
 
             return revenue;
         }
+
+        public int GetVehicleAmount(VehicleType type)
+        {
+            int amount = 0;
+
+            foreach (var vehicle in _context.Vehicle)
+            {
+                if (vehicle.Type == type)
+                {
+                    amount++;
+                }
+            }
+
+            return amount;
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Garage2._0G6.Models.ViewModels.VehiclesListViewModel>
+﻿@model ListViewModel
 
 @{
     ViewData["Title"] = "Vehicles";
@@ -7,9 +7,17 @@
 <h1>Vehicles</h1>
 
 <div>
-    <font class="m-3"><span class="font-weight-bold">Vehicles in garage:</span> @ViewBag.vehicleCount</font>
-    <font class="m-3"><span class="font-weight-bold">Wheels in garage:</span> @ViewBag.wheelCount</font>
-    <font class="m-3"><span class="font-weight-bold">Current revenue from vehicles in garage:</span> @ViewBag.revenue</font>
+    <font class="m-3"><span class="font-weight-bold">Cars in garage:</span> @Model.CarCount</font>
+    <font class="m-3"><span class="font-weight-bold">Buses in garage:</span> @Model.BusCount</font>
+    <font class="m-3"><span class="font-weight-bold">Boats in garage:</span> @Model.BoatCount</font>
+    <font class="m-3"><span class="font-weight-bold">Motorcycles in garage:</span> @Model.MotorcycleCount</font>
+    <font class="m-3"><span class="font-weight-bold">Airplanes in garage:</span> @Model.AirplaneCount</font>
+</div>
+
+<div>
+    <font class="m-3"><span class="font-weight-bold">Vehicles in garage:</span> @Model.VehicleCount</font>
+    <font class="m-3"><span class="font-weight-bold">Wheels in garage:</span> @Model.WheelCount</font>
+    <font class="m-3"><span class="font-weight-bold">Current revenue from vehicles in garage:</span> @Model.Revenue</font>
 </div>
 <br />
 <p>
@@ -19,19 +27,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Type)
+                Type
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Regnum)
+                Registration Number
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Arrivaldate)
+                Arrival Date
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.VehicleList)
         {
             <tr>
                 <td>
