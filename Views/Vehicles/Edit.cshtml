@@ -39,7 +39,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Wheel" class="control-label"></label>
-                <input asp-for="Wheel" class="form-control" min="1"/>
+                <input asp-for="Wheel" class="form-control" min="1" />
+                @*<input asp-for="Wheel" class="form-control" min="1" readonly/>Read only to block fields*@ 
                 <span asp-validation-for="Wheel" class="text-danger"></span>
             </div>
             <div class="form-group">

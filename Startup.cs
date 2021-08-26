@@ -39,7 +39,7 @@ namespace Garage2._0G6
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage(); //Todo change for Deployment
             }
             else
             {
