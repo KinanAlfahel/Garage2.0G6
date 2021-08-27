@@ -14,7 +14,7 @@ using Garage2._0G6.Models;
 
 namespace Garage2._0G6
 {
-    public class Startup
+    public class Startup //s
     {
         public Startup(IConfiguration configuration)
         {
